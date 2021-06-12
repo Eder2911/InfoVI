@@ -17,5 +17,4 @@ class Estudio extends Model
         'fechaRevision', 
         'resultado', 
         'documento'];
-
 }

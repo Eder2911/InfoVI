@@ -3,18 +3,32 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\Estudio;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePostEstudio;
 
 class EstudioController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+    */
+
     public function index()
     {
-        return 'Hola Mundo';
+        $estudio = Estudio::orderBy('created_at','desc')->paginate(4);
+        return view('dashboard.estudio.index', ['estudio'=>$estudio]); //si los pongo en plural marca error
     }
 
     /**
@@ -24,7 +38,7 @@ class EstudioController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.estudio.estudio', ['estudio'=> new Estudio()]);
     }
 
     /**
@@ -33,9 +47,19 @@ class EstudioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostEstudio $request)
     {
-        //
+        $request->tipo;
+        $request->fechaRealizacion;
+        $request->asistencia;
+        $request->fechaEntrega;
+        $request->fechaProximo;
+        $request->fechaRevision;
+        $request->resultado;
+        $request->documento;
+        
+        Estudio::create($request->validated());
+        return back()->with('status','Registro de estudio creado Satisfactoriamente');
     }
 
     /**
@@ -46,7 +70,8 @@ class EstudioController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Estudio::find($id);
+        if(isset($estudio)) return view('dashboard.estudio.show',['estudio'=>$estudio]);
     }
 
     /**
@@ -55,9 +80,9 @@ class EstudioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($estudio)
     {
-        //
+        return view('dashboard.estudio.edit',['estudio'=>$estudio]);
     }
 
     /**
@@ -67,9 +92,11 @@ class EstudioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StorePostEstudio $request, Estudio $estudio)
     {
-        //
+        $estudio->update($request->validated());
+        return back()->with('status','Registro de estudio actualizado Satisfactoriamente');
+
     }
 
     /**
@@ -78,8 +105,9 @@ class EstudioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Estudio $estudio)
     {
-        //
+        $estudio->delete();
+        return back()->with('status','Registro de estudio eliminado Satisfactoriamente');
     }
 }

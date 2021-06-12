@@ -13,7 +13,7 @@ class StorePostEstudio extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class StorePostEstudio extends FormRequest
     public function rules()
     {
         return [
-            //
-        ];
+            'tipo' => 'required|min:5|max:100', 
+            'fechaRealizacion' => 'required|min:5|max:100',
+            'asistencia' => '', //¿aquí qué pondríamos siendo un char? 
+            'fechaEntrega', 
+            'fechaProximo', 
+            'fechaRevision', 
+            'resultado', 
+            'resultado', 
+            'documento'];
     }
 }
