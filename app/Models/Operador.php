@@ -17,9 +17,10 @@ class Operador extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'nombre',
+        'apellidoPaterno',
+        'apellidoMaterno',
+        'email'
     ];
 
     /**

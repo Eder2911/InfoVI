@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboard\EstudioController;
+use App\Http\Controllers\dashboard\OperadorController;
+use App\Http\Controllers\dashboard\AuditTrailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +22,9 @@ Route::get('/', function () {
 });
 
 Route::resource('dasboard/estudio', EstudioController::class);
+Route::resource('dasboard/estudio', AuditTrailController::class);
+Route::resource('dasboard/estudio', OperadorController::class);
 
-
-//Route::resource('dashboard/post', PostController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

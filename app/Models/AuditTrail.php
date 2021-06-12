@@ -8,5 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class AuditTrail extends Model
 {
     use HasFactory;
-    
+    protected $fillable = [
+        'fechaProceso', 
+        'accion',
+        'campo', 
+        'valorAntiguo', 
+        'valorNuevo', 
+        'motivo', 
+        'idEstudio', 
+        'idOperador'];
 }
