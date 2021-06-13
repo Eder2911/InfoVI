@@ -22,9 +22,12 @@ class CreateAuditTrailTable extends Migration
             $table->string('valorNuevo', 100);
             $table->string('motivo', 100)->nullable();
             
+          //  $table->foreignId('idEstudio')->constrained('estudio');
+            //$table->foreignId('idOperador')->constrained('operador');
+
             //FK
-            $table->foreign('idEstudio')->references('idEstudio')->on('estudio');
-            $table->foreign('idOperador')->references('idOperador')->on('operador');
+          $table->foreignId('idEstudio')->references('idEstudio')->on('estudios');
+          $table->foreignId('idOperador')->references('idOperador')->on('operadores');
             $table->timestamps();
             //Hay que buscar otra forma de meter las FK porque no me dejó :V
         });

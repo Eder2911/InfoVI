@@ -21,9 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('dasboard/estudio', EstudioController::class);
-Route::resource('dasboard/estudio', AuditTrailController::class);
-Route::resource('dasboard/estudio', OperadorController::class);
+Route::resource('dashboard/estudio', EstudioController::class);
+
+//Route::resource('dasboard/estudio', AuditTrailController::class);
+//Route::resource('dasboard/estudio', OperadorController::class);
 
 Auth::routes();
 

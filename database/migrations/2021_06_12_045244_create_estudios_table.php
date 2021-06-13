@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEstudioTable extends Migration
+class CreateEstudiosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateEstudioTable extends Migration
      */
     public function up()
     {
-        Schema::create('estudio', function (Blueprint $table) {
+        Schema::create('estudios', function (Blueprint $table) {
             $table->id('idEstudio');
-            $table->char('tipo', 3);
+            $table->string('tipo', 200);
             $table->date('fechaRealizacion'); //Tipo Date
             $table->char('asistencia', 1)->nullable();
             $table->date('fechaEntrega')->nullable();
@@ -34,6 +34,6 @@ class CreateEstudioTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estudio');
+        Schema::dropIfExists('estudios');
     }
 }

@@ -68,9 +68,9 @@ class EstudioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idEstudio)
     {
-        $post = Estudio::find($id);
+        $estudio = Estudio::find($idEstudio);
         if(isset($estudio)) return view('dashboard.estudio.show',['estudio'=>$estudio]);
     }
 
