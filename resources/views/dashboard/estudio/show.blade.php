@@ -15,7 +15,32 @@
         
           <div class="form-group">
             <label for="asistencia">Asistencia</label>
-            <input readonly type="radio" class="form-control" name="asistencia" id="asistencia" placeholder="asistencia" value="{{old('asistencia', $estudio->asistencia)}}">
+            @if ( $estudio->asistencia == 1 )
+            <br>
+
+            {{--  <div class="form-check">
+              <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1" value="1" disabled>
+              <label class="form-check-label" for="flexRadioDefault1">
+                Asistió
+              </label>
+            </div>  --}}
+            <input type="radio" id="asistencia" value="1" name="asistencia" value="{{old('asistencia', $estudio->asistencia)}}" checked disabled>
+            <label for="asistencia">Si</label><br>
+            
+
+            @elseif ( $estudio->asistencia == 0 )
+              {{--  <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault2" value="0" checked disabled>
+                <label class="form-check-label" for="flexRadioDefault2">
+                  No asistió
+                </label>
+              </div>  --}}
+              <input type="radio" id="asistencia" value="0" name="asistencia" value="{{old('asistencia', $estudio->asistencia)}}" checked disabled>
+              <label for="asistencia">No</label><br>
+
+            @endif 
+            
+
           </div>
         
           <div class="form-group">

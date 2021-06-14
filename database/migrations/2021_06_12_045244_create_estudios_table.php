@@ -14,7 +14,7 @@ class CreateEstudiosTable extends Migration
     public function up()
     {
         Schema::create('estudios', function (Blueprint $table) {
-            $table->id('idEstudio');
+            $table->id();
             $table->string('tipo', 200);
             $table->date('fechaRealizacion'); //Tipo Date
             $table->char('asistencia', 1)->nullable();
@@ -22,7 +22,7 @@ class CreateEstudiosTable extends Migration
             $table->date('fechaProximo')->nullable();
             $table->date('fechaRevision')->nullable();
             $table->string('resultado', 100)->nullable();
-            $table->char('documento', 1)->nullable(); //tipo archivo no encontré en la documentación de laravel :S
+            $table->string('documento', 500)->nullable(); //tipo archivo no encontré en la documentación de laravel :S
             $table->timestamps(); //Debemos agregarlalo en el diagrama?
         });
     }

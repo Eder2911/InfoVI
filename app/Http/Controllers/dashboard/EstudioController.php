@@ -28,8 +28,8 @@ class EstudioController extends Controller
     public function index()
     {
         
-       $estudio = Estudio::orderBy('created_at','desc')->paginate(4);
-       return view('dashboard.estudio.index', ['estudio'=>$estudio]); //si los pongo en plural marca error
+       $estudios = Estudio::orderBy('created_at','desc')->paginate(4);
+       return view('dashboard.estudio.index', ['estudios'=>$estudios]); //si los pongo en plural marca error
        //return view('dashboard.estudio._form');
     }
 
@@ -71,9 +71,9 @@ class EstudioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($idEstudio)
+    public function show($id)
     {
-        $estudio = Estudio::find($idEstudio);
+        $estudio = Estudio::findOrFail($id);
         if(isset($estudio)) return view('dashboard.estudio.show',['estudio'=>$estudio]);
     }
 
@@ -83,7 +83,7 @@ class EstudioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($estudio)
+    public function edit(Estudio $estudio)
     {
         return view('dashboard.estudio.edit',['estudio'=>$estudio]);
     }

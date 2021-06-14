@@ -48,29 +48,46 @@
             <input type="text" class="form-control" name="resultado" id="resultado" placeholder="resultado" value="{{old('resultado', $estudio->resultado)}}">
           </div>
 
+
         <div class="col-md-6 offset-md-3" >
             <label class="form-label">Asistencia</label>
         </br>
-            <input type="radio" id="asistencia" value="1" name="asistencia" value="{{old('asistencia', $estudio->asistencia)}}">
-            <label for="asistencia">Si</label><br>
-            <input type="radio" id="asistencia" value="0" name="asistencia" value="{{old('asistencia', $estudio->asistencia)}}">
-            <label for="asistencia">No</label><br>
-            
-        </div>
+       
+              
+                @if(isset($estudio->asistencia))
+                  @if (old('asistencia', $estudio->asistencia) == 1)
+                    {{--  SI  --}}
+                    <input type="radio" id="asistencia" name="asistencia" value="1" checked>
+                    <label for="asistencia">Si</label><br>
+                    {{--  NO  --}}
+                    <input type="radio" id="asistencia" name="asistencia" value="0" >
+                    <label for="asistencia">No</label><br>
+                  @else 
+                    {{--  SI  --}}
+                    <input type="radio" id="asistencia" name="asistencia" value="1">
+                    <label for="asistencia">Si</label><br>
+                    {{--  NO  --}}
+                    <input type="radio" id="asistencia" name="asistencia" value="0" checked>
+                    <label for="asistencia">No</label><br>
+                  
+                  @endif
 
-        <div class="col-md-6 offset-md-3">
-          <h2 class="text-center">Sube tu archivo</h2>
-          <form method="POST" enctype="multipart/form-data" id="upload-file" action="{{ url('store') }}">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <input type="file" name="file" placeholder="Elegir un archivo" id="file">
+                 @else
+              
+                  <input type="radio" id="asistencia" value="1" name="asistencia">
+                  <label for="asistencia">Si</label><br>
+                  <input type="radio" id="asistencia" value="0" name="asistencia">
+                  <label for="asistencia">No</label><br>
+                  
+                @endif
+
+        {{--  Espacio para subir un archivo  --}}
+                <div>
+                  <label for="formFile" class="form-label">Sube tu archivo aquí</label>
+                  <input class="form-control form-control" id="documento" type="file">
+                  
                 </div>
-              </div>
-            </div> 
-          </form>   
-          </br>
-        </div>
+
 
         <div class="col-md-6 offset-md-3">
             <button type="submit" class="btn btn-primary">Registrar</button></div>

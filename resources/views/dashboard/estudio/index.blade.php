@@ -13,17 +13,17 @@
         <th scope="col">Actions</th>
       </tr>
     </thead>
-    @foreach($estudio as $estudio)
+    @foreach($estudios as $estudio)
     <tbody>
       <tr>
-        <th scope="row">{{$estudio->idEstudio}}</th>
+        <th scope="row">{{$estudio->id}}</th>
         <td>{{$estudio->tipo}}</td>
         {{--  <td>{{$estudio->posted}}</td>
         <td>{{$estudio->created_at->format('d-m-Y')}}</td>
         <td>{{$estudio->updated_at}}</td>  --}}
         <td>
-          <a href="{{route('estudio.show',$estudio->idEstudio)}}" class="btn btn-primary">Consultar</a>
-          <a href="{{route('estudio.edit',$estudio->idEstudio)}}" class="btn btn-primary">Editar</a>
+          <a href="{{route('estudio.show',$estudio->id)}}" class="btn btn-primary">Consultar</a>
+          <a href="{{route('estudio.edit',$estudio->id)}}" class="btn btn-primary">Editar</a>
         </td>
         <td>
           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
@@ -50,11 +50,11 @@
           ¿Seguro que deseas eliminar el registro?
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No eliminar</button>
           <form action="{{route('estudio.destroy', $estudio->idEstudio)}}" method="POST">
             @csrf 
             @method('DELETE')
-            <button class="btn btn-danger" type="submit">Sí, Eliminar</button>
+            <button class="btn btn-danger" type="submit">Sí, eliminar</button>
         </form>  --}}
           
         </div>
