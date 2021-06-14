@@ -10,27 +10,27 @@
         
           <div class="form-group">
             <label for="FechaRealizacion">Fecha de realización</label>
-            <input readonly type="text" class="form-control" name="fechaRealizacion" id="fechaRealizacion" placeholder="FechaRealizacion" value="{{old('fechaRealizacion',$estudio->fechaRealizacion)}}">
+            <input readonly type="date" class="form-control" name="fechaRealizacion" id="fechaRealizacion" placeholder="FechaRealizacion" value="{{old('fechaRealizacion',$estudio->fechaRealizacion)}}">
           </div>
         
           <div class="form-group">
             <label for="asistencia">Asistencia</label>
-              <input readonly type="text" class="form-control" name="asistencia" id="asistencia" placeholder="asistencia" value="{{old('asistencia', $estudio->asistencia)}}">
+            <input readonly type="radio" class="form-control" name="asistencia" id="asistencia" placeholder="asistencia" value="{{old('asistencia', $estudio->asistencia)}}">
           </div>
         
           <div class="form-group">
             <label for="fechaEntrega">Fecha de entrega: </label>
-              <input readonly type="text" class="form-control" name="fechaEntrega" id="fechaEntrega" placeholder="fechaEntrega" value="{{old('fechaEntrega', $estudio->fechaEntrega)}}">
+              <input readonly type="date" class="form-control" name="fechaEntrega" id="fechaEntrega" placeholder="fechaEntrega" value="{{old('fechaEntrega', $estudio->fechaEntrega)}}">
           </div>
         
           <div class="form-group">
             <label for="fechaProximo">Fecha de próximo estudio: </label>
-              <input readonly type="text" class="form-control" name="fechaProximo" id="fechaProximo" placeholder="fechaProximo" value="{{old('fechaProximo', $estudio->fechaProximo)}}">
+              <input readonly type="date" class="form-control" name="fechaProximo" id="fechaProximo" placeholder="fechaProximo" value="{{old('fechaProximo', $estudio->fechaProximo)}}">
           </div>
         
           <div class="form-group">
             <label for="fechaRevision">Fecha de revision: </label>
-              <input readonly type="text" class="form-control" name="fechaRevision" id="fechaRevision" placeholder="fechaRevision" value="{{old('fechaRevision', $estudio->fechaRevision)}}">
+              <input readonly type="date" class="form-control" name="fechaRevision" id="fechaRevision" placeholder="fechaRevision" value="{{old('fechaRevision', $estudio->fechaRevision)}}">
           </div>
         
           <div class="form-group">

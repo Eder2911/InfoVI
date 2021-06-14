@@ -22,7 +22,7 @@
         <td>{{$estudio->created_at->format('d-m-Y')}}</td>
         <td>{{$estudio->updated_at}}</td>  --}}
         <td>
-          <a href="{{route('estudio.show',$estudio->idEstudio)}}" class="btn btn-primary">Ver</a>
+          <a href="{{route('estudio.show',$estudio->idEstudio)}}" class="btn btn-primary">Consultar</a>
           <a href="{{route('estudio.edit',$estudio->idEstudio)}}" class="btn btn-primary">Editar</a>
         </td>
         <td>
@@ -36,7 +36,7 @@
   </table>
 
   
-  <!-- Modal -->
+  {{--  <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -55,7 +55,7 @@
             @csrf 
             @method('DELETE')
             <button class="btn btn-danger" type="submit">Sí, Eliminar</button>
-        </form>
+        </form>  --}}
           
         </div>
       </div>

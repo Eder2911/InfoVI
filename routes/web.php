@@ -17,9 +17,11 @@ use App\Http\Controllers\dashboard\AuditTrailController;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/dashboard/estudio');
 });
+
 
 Route::resource('dashboard/estudio', EstudioController::class);
 

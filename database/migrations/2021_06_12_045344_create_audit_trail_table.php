@@ -27,7 +27,7 @@ class CreateAuditTrailTable extends Migration
 
             //FK
           $table->foreignId('idEstudio')->references('idEstudio')->on('estudios');
-          $table->foreignId('idOperador')->references('idOperador')->on('operadores');
+          $table->foreignId('id')->references('id')->on('users');
             $table->timestamps();
             //Hay que buscar otra forma de meter las FK porque no me dejó :V
         });
@@ -39,7 +39,9 @@ class CreateAuditTrailTable extends Migration
      * @return void
      */
     public function down()
+    
     {
         Schema::dropIfExists('audit_trail');
     }
+
 }

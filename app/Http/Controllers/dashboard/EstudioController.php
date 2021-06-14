@@ -27,8 +27,10 @@ class EstudioController extends Controller
 
     public function index()
     {
-        $estudio = Estudio::orderBy('created_at','desc')->paginate(4);
-        return view('dashboard.estudio.index', ['estudio'=>$estudio]); //si los pongo en plural marca error
+        
+       $estudio = Estudio::orderBy('created_at','desc')->paginate(4);
+       return view('dashboard.estudio.index', ['estudio'=>$estudio]); //si los pongo en plural marca error
+       //return view('dashboard.estudio._form');
     }
 
     /**
@@ -60,6 +62,7 @@ class EstudioController extends Controller
         
         Estudio::create($request->validated());
         return back()->with('status','Registro de estudio creado Satisfactoriamente');
+
     }
 
     /**
