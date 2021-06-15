@@ -12,7 +12,7 @@
     <form class= container>
         <div>
             <h3 class="col-md-6 offset-md-3">
-                Registrar estudio
+                Estudio
             </h3>
         </div>
 
@@ -30,7 +30,7 @@
 
           <div class="col-md-6 offset-md-3" >
             <label  class="form-label">Hora de estudio</label>
-            <input type="time" class="form-control" name="horaRealizacion" id="horaRealizacion" placeholder="FechaRealizacion" value="{{old('fechaRealizacion',$estudio->fechaRealizacion)}}">
+            <input type="time" class="form-control" name="horaRealizacion" id="horaRealizacion" placeholder="FechaRealizacion" value="{{old('fechaRealizacion',$estudio->horaRealizacion)}}">
           </div>
 
           <div class="col-md-6 offset-md-3" >
@@ -89,8 +89,9 @@
         {{--  Espacio para subir un archivo  --}}
                 <div>
                   <label for="formFile" class="form-label">Sube tu archivo aquí</label>
-                  <input class="form-control form-control" name='documento' id="documento" type="file">
-                  
+                  <input class="form-control form-control" name='documento' id="documento" type="file" value="{{old('documento', $estudio->documento)}}" method='PUT'>
+                  @csrf
+                  {{method_field('POST')}}
                 </div>
 
 

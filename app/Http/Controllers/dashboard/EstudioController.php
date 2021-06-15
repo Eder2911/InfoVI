@@ -62,7 +62,6 @@ class EstudioController extends Controller
         $request->resultado;
         $request->documento;
         */
-
         if($request->hasFile("documento")){
             
             $hora = str_replace(":", "", $request->horaRealizacion)."00";
@@ -90,7 +89,7 @@ class EstudioController extends Controller
         
         Estudio::create($request->validated()); 
         //dd($request);
-        return back()->with('status','Registro de estudio creado Satisfactoriamente');
+        return back()->with('status','Registro de estudio creado Satisfactoriamente, el día: '.$request->fechaRealizacion.'Da click ');
         
     }
 
@@ -121,6 +120,24 @@ class EstudioController extends Controller
      */
     public function update(StorePostEstudio $request, Estudio $estudio)
     {
+        
+        if($request->hasFile("documento")){
+            
+            $hora = str_replace(":", "", $request->horaRealizacion)."00";
+
+                $file=$request->file("documento");
+                //dd($request);
+                $nombre = $request->tipo."-".$request->fechaRealizacion."-".$hora.".".$file->guessExtension();
+
+                $ruta = public_path("storage/".$nombre);
+
+                if($file->guessExtension()=="pdf"){
+                    copy($file, $ruta);
+                }else{
+                    dd("NO ES UN PDF O ES DEMASIADO GRANDE");
+                }
+        }
+
         $estudio->update($request->validated());
         return back()->with('status','Registro de estudio actualizado Satisfactoriamente');
     }
@@ -131,10 +148,10 @@ class EstudioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Estudio $estudio)
+    public function destroy($id)
     {
-        $estudio->delete();
-        return back()->with('status','Registro de estudio eliminado Satisfactoriamente');
+        Estudio::destroy($id);
+        return redirect('dashboard/estudio')->with('status','Registro de estudio eliminado Satisfactoriamente');
     }
 
 

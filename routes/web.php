@@ -25,7 +25,7 @@ Route::get('/', function () {
 
 
 Route::get('public/pdf/{file}', [EstudioController::class, 'descargar']);
-
+//Route::delete('dashboard/estudio/{id}', [EstudioController::class, 'destroy']);
 Route::resource('dashboard/estudio', EstudioController::class);
 
 //Route::resource('dasboard/estudio', AuditTrailController::class);
