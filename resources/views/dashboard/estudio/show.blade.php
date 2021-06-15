@@ -62,11 +62,17 @@
             <label for="resultado">Resultado:</label>
               <input readonly type="text" class="form-control" name="resultado" id="resultado" placeholder="resultado" value="{{old('resultado', $estudio->resultado)}}">
           </div>
-        
-          <div class="form-group">
-            <label for="documento">Documento:</label>
-              <input readonly type="text" class="form-control" name="documento" id="documento" placeholder="documento" value="{{old('documento', $estudio->documento)}}">
-          </div>
+          
+            <div class="form-group">
+              <label for="documento">Documento: </label>
+
+                <a type="text" class="form-control" href="../../storage/{{$estudio->tipo."-".$estudio->fechaRealizacion."-".str_replace(":", "", $estudio->horaRealizacion)}}.pdf">Ver documento de estudio</a>
+              
+            </div>
+         
 
     </form>
 @endsection
+
+
+{{-- {{old('documento', $estudio->documento)}} --}}

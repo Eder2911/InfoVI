@@ -24,8 +24,13 @@
         </div>
 
         <div class="col-md-6 offset-md-3" >
-            <label  class="form-label">Fecha de realizacion</label>
+            <label  class="form-label">Fecha de estudio</label>
             <input type="date" class="form-control" name="fechaRealizacion" id="fechaRealizacion" placeholder="FechaRealizacion" value="{{old('fechaRealizacion',$estudio->fechaRealizacion)}}">
+          </div>
+
+          <div class="col-md-6 offset-md-3" >
+            <label  class="form-label">Hora de estudio</label>
+            <input type="time" class="form-control" name="horaRealizacion" id="horaRealizacion" placeholder="FechaRealizacion" value="{{old('fechaRealizacion',$estudio->fechaRealizacion)}}">
           </div>
 
           <div class="col-md-6 offset-md-3" >
@@ -84,7 +89,7 @@
         {{--  Espacio para subir un archivo  --}}
                 <div>
                   <label for="formFile" class="form-label">Sube tu archivo aquí</label>
-                  <input class="form-control form-control" id="documento" type="file">
+                  <input class="form-control form-control" name='documento' id="documento" type="file">
                   
                 </div>
 

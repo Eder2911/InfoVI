@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\dashboard;
 
-use App\Http\Controllers\Controller;
+use DateTime;
 use App\Models\Estudio;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostEstudio;
 
 class EstudioController extends Controller
@@ -51,7 +52,8 @@ class EstudioController extends Controller
      */
     public function store(StorePostEstudio $request)
     {
-        $request->tipo;
+       /*
+       $request->tipo;
         $request->fechaRealizacion;
         $request->asistencia;
         $request->fechaEntrega;
@@ -59,18 +61,40 @@ class EstudioController extends Controller
         $request->fechaRevision;
         $request->resultado;
         $request->documento;
-        
-        Estudio::create($request->validated());
-        return back()->with('status','Registro de estudio creado Satisfactoriamente');
+        */
 
+        if($request->hasFile("documento")){
+            
+            $hora = str_replace(":", "", $request->horaRealizacion)."00";
+
+                $file=$request->file("documento");
+                //dd($request);
+                $nombre = $request->tipo."-".$request->fechaRealizacion."-".$hora.".".$file->guessExtension();
+
+                $ruta = public_path("storage/".$nombre);
+
+                if($file->guessExtension()=="pdf"){
+                    copy($file, $ruta);
+                }else{
+                    dd("NO ES UN PDF O ES DEMASIADO GRANDE");
+
+                }
+            
+        }
+
+        //$request->ruta=$ruta;
+       // dd($request);
+
+        //$request->file('documento')->store('public');
+
+        
+        Estudio::create($request->validated()); 
+        //dd($request);
+        return back()->with('status','Registro de estudio creado Satisfactoriamente');
+        
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show($id)
     {
         $estudio = Estudio::findOrFail($id);
@@ -99,7 +123,6 @@ class EstudioController extends Controller
     {
         $estudio->update($request->validated());
         return back()->with('status','Registro de estudio actualizado Satisfactoriamente');
-
     }
 
     /**
@@ -112,5 +135,13 @@ class EstudioController extends Controller
     {
         $estudio->delete();
         return back()->with('status','Registro de estudio eliminado Satisfactoriamente');
+    }
+
+
+    public function descargar($file)
+    {
+        //dd($file);
+        return response()->download("/public/pdf/$file");
+        
     }
 }

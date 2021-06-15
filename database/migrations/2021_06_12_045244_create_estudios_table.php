@@ -16,13 +16,14 @@ class CreateEstudiosTable extends Migration
         Schema::create('estudios', function (Blueprint $table) {
             $table->id();
             $table->string('tipo', 200);
-            $table->date('fechaRealizacion'); //Tipo Date
+            $table->date('fechaRealizacion');
+            $table->time('horaRealizacion');
             $table->char('asistencia', 1)->nullable();
             $table->date('fechaEntrega')->nullable();
             $table->date('fechaProximo')->nullable();
             $table->date('fechaRevision')->nullable();
             $table->string('resultado', 100)->nullable();
-            $table->string('documento', 500)->nullable(); //tipo archivo no encontré en la documentación de laravel :S
+            $table->string('documento', 500);
             $table->timestamps(); //Debemos agregarlalo en el diagrama?
         });
     }

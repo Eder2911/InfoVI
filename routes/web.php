@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboard\EstudioController;
 use App\Http\Controllers\dashboard\OperadorController;
 use App\Http\Controllers\dashboard\AuditTrailController;
+use App\Models\Estudio;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,8 @@ Route::get('/', function () {
     return redirect('/dashboard/estudio');
 });
 
+
+Route::get('public/pdf/{file}', [EstudioController::class, 'descargar']);
 
 Route::resource('dashboard/estudio', EstudioController::class);
 

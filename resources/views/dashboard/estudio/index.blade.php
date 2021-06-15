@@ -26,22 +26,25 @@
           <a href="{{route('estudio.edit',$estudio->id)}}" class="btn btn-primary">Editar</a>
         </td>
         <td>
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
             Eliminar
           </button>
+          {{--  <form action="{{route('estudio.destroy', $estudio->id)}}" method="POST">
+            @csrf 
+            @method('DELETE')  --}}
         </td>
       </tr>
       @endforeach
     </tbody>
   </table>
 
-  
-  {{--  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ 
+      <!-- Modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Borrar estudio</h5>
+          <h5 class="modal-title" id="modalLabel">Borrar estudio</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -51,15 +54,34 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">No eliminar</button>
-          <form action="{{route('estudio.destroy', $estudio->idEstudio)}}" method="POST">
+          <form id="formDelete" action="{{route('estudio.destroy', 0)}}" method="POST">
             @csrf 
             @method('DELETE')
             <button class="btn btn-danger" type="submit">Sí, eliminar</button>
-        </form>  --}}
+        </form>
+  
+  
           
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+    window.onload = function(){
+      $("#deleteModal").on('show.bs.modal', function (event) {
+        // Button that triggered the modal
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+
+        action = $('#formDelete').attr('data-action').slice(0, -1);
+        action += id;
+
+        var modal = $(this);
+        modal.find('.modal-title').text('Eliminar el Post: ' + id)
+      })
+    }
+
+  </script>
 
 @endsection
