@@ -25,13 +25,15 @@ class StorePostEstudio extends FormRequest
     {
         return [
             'tipo' => 'required|min:5|max:100', 
-            'fechaRealizacion' => 'required|min:5|max:100',
-            'asistencia' => '', //¿aquí qué pondríamos siendo un char? 
+            'fechaRealizacion' => 'required',
+            'horaRealizacion' => 'required',
+            'asistencia' => 'required', 
             'fechaEntrega', 
             'fechaProximo', 
             'fechaRevision', 
             'resultado', 
             'resultado', 
-            'documento'];
+            'documento' => 'max:2048'
+        ];
     }
 }

@@ -1,7 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
+@csrf
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
     <style type="text/css">
@@ -12,8 +11,9 @@
 
     <form class= container>
         <div>
+          <br>
             <h3 class="col-md-6 offset-md-3">
-                Registrar estudio
+                Estudio
             </h3>
         </div>
 
@@ -21,22 +21,27 @@
         <div class="row align-items-start">
         <div class="col-md-6 offset-md-3" >
           <label  class="form-label">Tipo de estudio</label>
-          <input type="text" class="form-control" name="tipoEstudio" id="tipoEstudio" placeholder="Tipo" value="{{old('tipo', $estudio->tipo)}}">
+          <input type="text" class="form-control" name="tipo" id="tipo" placeholder="Tipo" value="{{old('tipo', $estudio->tipo)}}">
         </div>
 
         <div class="col-md-6 offset-md-3" >
-            <label  class="form-label">Fecha de realizacion</label>
+            <label  class="form-label">Fecha de estudio</label>
             <input type="date" class="form-control" name="fechaRealizacion" id="fechaRealizacion" placeholder="FechaRealizacion" value="{{old('fechaRealizacion',$estudio->fechaRealizacion)}}">
           </div>
 
           <div class="col-md-6 offset-md-3" >
+            <label  class="form-label">Hora de estudio</label>
+            <input type="time" class="form-control" name="horaRealizacion" id="horaRealizacion" placeholder="FechaRealizacion" value="{{old('fechaRealizacion',$estudio->horaRealizacion)}}">
+          </div>
+
+          <div class="col-md-6 offset-md-3" >
             <label  class="form-label">Fecha de entrega</label>
-            <input type="date" class="form-control" name="fechaEntrega" id="fechaEntrega" placeholder="fechaEntrega" value="{{old('fechaEntrega', $post->fechaEntrega)}}">
+            <input type="date" class="form-control" name="fechaEntrega" id="fechaEntrega" placeholder="fechaEntrega" value="{{old('fechaEntrega', $estudio->fechaEntrega)}}">
           </div>  
 
           <div class="col-md-6 offset-md-3" >
             <label  class="form-label">Fecha del proximo estudio</label>
-            <input type="date" class="form-control" name="fechaProximo" id="fechaProximo" placeholder="fechaProximo" value="{{old('fechaProximo', $post->fechaProximo)}}">
+            <input type="date" class="form-control" name="fechaProximo" id="fechaProximo" placeholder="fechaProximo" value="{{old('fechaProximo', $estudio->fechaProximo)}}">
           </div>
 
           <div class="col-md-6 offset-md-3" >
@@ -49,32 +54,52 @@
             <input type="text" class="form-control" name="resultado" id="resultado" placeholder="resultado" value="{{old('resultado', $estudio->resultado)}}">
           </div>
 
+
         <div class="col-md-6 offset-md-3" >
             <label class="form-label">Asistencia</label>
         </br>
-            <input type="radio" id="asistio" name="asistio" value="{{old('asistencia', $estudio->asistencia)}}">
-            <label for="asistencia">Si</label><br>
-            <input type="radio" id="no_asistio" name="no_asistio" value="{{old('asistencia', $estudio->asistencia)}}">
-            <label for="asistencia">No</label><br>
-            
-        </div>
+       
+              
+                @if(isset($estudio->asistencia))
+                  @if (old('asistencia', $estudio->asistencia) == 1)
+                    {{--  SI  --}}
+                    <input type="radio" id="asistencia" name="asistencia" value="1" checked>
+                    <label for="asistencia">Si</label><br>
+                    {{--  NO  --}}
+                    <input type="radio" id="asistencia" name="asistencia" value="0" >
+                    <label for="asistencia">No</label><br>
+                  @else 
+                    {{--  SI  --}}
+                    <input type="radio" id="asistencia" name="asistencia" value="1">
+                    <label for="asistencia">Si</label><br>
+                    {{--  NO  --}}
+                    <input type="radio" id="asistencia" name="asistencia" value="0" checked>
+                    <label for="asistencia">No</label><br>
+                  
+                  @endif
 
-        <div class="col-md-6 offset-md-3">
- 
-            <h2 class="text-center">Sube tu archivo</h2>
-                <form method="POST" enctype="multipart/form-data" id="upload-file" action="{{ url('store') }}">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="file" name="file" placeholder="Choose file" id="file">
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </br>
-        </div>
+                 @else
+              
+                  <input type="radio" id="asistencia" value="1" name="asistencia">
+                  <label for="asistencia">Si</label><br>
+                  <input type="radio" id="asistencia" value="0" name="asistencia">
+                  <label for="asistencia">No</label><br>
+                  
+                @endif
+
+        {{--  Espacio para subir un archivo  --}}
+                <div>
+                  <label for="formFile" class="form-label">Sube tu archivo aquí</label>
+                  <input class="form-control form-control" name='documento' id="documento" type="file" value="{{old('documento', $estudio->documento)}}">
+                  
+                </div>
+
 
         <div class="col-md-6 offset-md-3">
             <button type="submit" class="btn btn-primary">Registrar</button></div>
+            <br>
+            <br>
         </div>
+      </br>
+      </br>
     </form>

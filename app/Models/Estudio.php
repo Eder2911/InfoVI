@@ -11,10 +11,12 @@ class Estudio extends Model
     protected $fillable = [
         'tipo', 
         'fechaRealizacion',
+        'horaRealizacion',
         'asistencia', 
         'fechaEntrega', 
         'fechaProximo', 
         'fechaRevision', 
         'resultado', 
         'documento'];
+
 }

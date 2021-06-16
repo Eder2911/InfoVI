@@ -1,5 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
+        <a class="navbar-brand ">
+            <img src="https://image.flaticon.com/icons/png/512/607/607600.png" alt="" width="30" height="30">
+        </a>
         <a class="navbar-brand" href="{{route('home')}}">
           Proyecto 3
         </a>
@@ -12,21 +15,21 @@
                     <a class="nav-link" href="{{route('estudio.index')}}">Estudio</a>
                 </li>
             </ul>
-        
+
             @auth
             <ul class="navbar-nav">
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }} //deberiamos cambiar el user por "operador" ?? 
+                        {{ Auth::user()->name }}
                     </a>
-        
+
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
+                            {{ __('Cerrar sesión') }}
                         </a>
-        
+
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>

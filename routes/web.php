@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboard\EstudioController;
 use App\Http\Controllers\dashboard\OperadorController;
 use App\Http\Controllers\dashboard\AuditTrailController;
+use App\Models\Estudio;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +18,25 @@ use App\Http\Controllers\dashboard\AuditTrailController;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/dashboard/estudio');
 });
 
-Route::resource('dasboard/estudio', EstudioController::class);
-Route::resource('dasboard/estudio', AuditTrailController::class);
-Route::resource('dasboard/estudio', OperadorController::class);
+
+// Para pruebas
+//Route::delete('dashboard/estudio/{id}', [EstudioController::class, 'destroy']);
+
+//Route::resource('dasboard/estudio', AuditTrailController::class);
+//Route::resource('dasboard/estudio', OperadorController::class);
+
+// Produccion
+
+Route::get('public/pdf/{file}', [EstudioController::class, 'descargar']);
+
+
+Route::resource('dashboard/estudio', EstudioController::class);
+
 
 Auth::routes();
 

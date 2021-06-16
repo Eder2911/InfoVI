@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\dashboard;
 
-use App\Http\Controllers\Controller;
+use DateTime;
 use App\Models\Estudio;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostEstudio;
 
 class EstudioController extends Controller
@@ -27,8 +28,10 @@ class EstudioController extends Controller
 
     public function index()
     {
-        $estudio = Estudio::orderBy('created_at','desc')->paginate(4);
-        return view('dashboard.estudio.index', ['estudio'=>$estudio]); //si los pongo en plural marca error
+        
+       $estudios = Estudio::orderBy('created_at','desc')->paginate(10);
+       return view('dashboard.estudio.index', ['estudios'=>$estudios]); //si los pongo en plural marca error
+       //return view('dashboard.estudio._form');
     }
 
     /**
@@ -49,7 +52,8 @@ class EstudioController extends Controller
      */
     public function store(StorePostEstudio $request)
     {
-        $request->tipo;
+       /*
+       $request->tipo;
         $request->fechaRealizacion;
         $request->asistencia;
         $request->fechaEntrega;
@@ -57,20 +61,45 @@ class EstudioController extends Controller
         $request->fechaRevision;
         $request->resultado;
         $request->documento;
+        */
+        if($request->hasFile("documento")){
+            
+            $hora = str_replace(":", "", $request->horaRealizacion)."00";
+
+                $file=$request->file("documento");
+                //dd($request);
+                $nombre = $request->tipo."-".$request->fechaRealizacion."-".$hora.".".$file->guessExtension();
+
+                $ruta = public_path("storage/".$nombre);
+
+                if($file->guessExtension()=="pdf"){
+                    copy($file, $ruta);
+                }elseif($file->guessExtension()=="png"){
+                    copy($file, $ruta);
+                }elseif($file->guessExtension()=="jpg"){
+                    copy($file, $ruta);
+                }else {
+                    return back()->with('status', 'Archivo no valido');
+                }
+            
+        }
+
+        //$request->ruta=$ruta;
+       // dd($request);
+
+        //$request->file('documento')->store('public');
+
         
-        Estudio::create($request->validated());
-        return back()->with('status','Registro de estudio creado Satisfactoriamente');
+        Estudio::create($request->validated()); 
+        //dd($request);
+        return back()->with('status','Registro de estudio creado Satisfactoriamente. | Fecha del estudio: '.$request->fechaRealizacion);
+        
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show($id)
     {
-        $post = Estudio::find($id);
+        $estudio = Estudio::findOrFail($id);
         if(isset($estudio)) return view('dashboard.estudio.show',['estudio'=>$estudio]);
     }
 
@@ -80,7 +109,7 @@ class EstudioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($estudio)
+    public function edit(Estudio $estudio)
     {
         return view('dashboard.estudio.edit',['estudio'=>$estudio]);
     }
@@ -95,8 +124,7 @@ class EstudioController extends Controller
     public function update(StorePostEstudio $request, Estudio $estudio)
     {
         $estudio->update($request->validated());
-        return back()->with('status','Registro de estudio actualizado Satisfactoriamente');
-
+        return back()->with('error','Registro de estudio actualizado Satisfactoriamente');
     }
 
     /**
@@ -105,9 +133,17 @@ class EstudioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Estudio $estudio)
+    public function destroy($id)
     {
-        $estudio->delete();
-        return back()->with('status','Registro de estudio eliminado Satisfactoriamente');
+        Estudio::destroy($id);
+        return redirect('dashboard/estudio')->with('status','Registro de estudio eliminado Satisfactoriamente');
+    }
+
+
+    public function descargar($file)
+    {
+        //dd($file);
+        return response()->download("/public/pdf/$file");
+        
     }
 }

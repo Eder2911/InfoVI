@@ -1,8 +1,8 @@
 @extends('dashboard.master')
 @section('content')
 @include('dashboard.partials.validation-errors')
-    <form action="{{route('estudio.update', $estudio->idEstudio)}}" method="POST">
+    <form action="{{route('estudio.update', $estudio->id)}}" method="POST">
         @method('PUT')
-        @include('dashboard.post._form')
+        @include('dashboard.estudio._form')
     </form>
 @endsection
