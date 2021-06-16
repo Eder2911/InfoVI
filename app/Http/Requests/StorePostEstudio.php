@@ -33,7 +33,7 @@ class StorePostEstudio extends FormRequest
             'fechaRevision', 
             'resultado', 
             'resultado', 
-            'documento' => 'file|max:2048|mimes:png,jpg,pdf',
-            'ruta'];
+            'documento' => 'max:2048'
+        ];
     }
 }

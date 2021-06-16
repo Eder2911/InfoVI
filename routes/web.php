@@ -24,12 +24,19 @@ Route::get('/', function () {
 });
 
 
-Route::get('public/pdf/{file}', [EstudioController::class, 'descargar']);
+// Para pruebas
 //Route::delete('dashboard/estudio/{id}', [EstudioController::class, 'destroy']);
-Route::resource('dashboard/estudio', EstudioController::class);
 
 //Route::resource('dasboard/estudio', AuditTrailController::class);
 //Route::resource('dasboard/estudio', OperadorController::class);
+
+// Produccion
+
+Route::get('public/pdf/{file}', [EstudioController::class, 'descargar']);
+
+
+Route::resource('dashboard/estudio', EstudioController::class);
+
 
 Auth::routes();
 

@@ -12,29 +12,24 @@
             <label for="FechaRealizacion">Fecha de realización</label>
             <input readonly type="date" class="form-control" name="fechaRealizacion" id="fechaRealizacion" placeholder="FechaRealizacion" value="{{old('fechaRealizacion',$estudio->fechaRealizacion)}}">
           </div>
+
+
+          <div class="form-group">
+            <label for="horaRealizacion">Hora de realización</label>
+            <input readonly type="time" class="form-control" name="horaRealizacion" id="horaRealizacion" placeholder="horaRealizacion" value="{{old('horaRealizacion',str_replace(":00", "", $estudio->horaRealizacion))}}">
+          </div>
         
           <div class="form-group">
             <label for="asistencia">Asistencia</label>
             @if ( $estudio->asistencia == 1 )
             <br>
 
-            {{--  <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault1" value="1" disabled>
-              <label class="form-check-label" for="flexRadioDefault1">
-                Asistió
-              </label>
-            </div>  --}}
             <input type="radio" id="asistencia" value="1" name="asistencia" value="{{old('asistencia', $estudio->asistencia)}}" checked disabled>
             <label for="asistencia">Si</label><br>
             
 
             @elseif ( $estudio->asistencia == 0 )
-              {{--  <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="flexRadioDefault" id="flexRadioDefault2" value="0" checked disabled>
-                <label class="form-check-label" for="flexRadioDefault2">
-                  No asistió
-                </label>
-              </div>  --}}
+
               <input type="radio" id="asistencia" value="0" name="asistencia" value="{{old('asistencia', $estudio->asistencia)}}" checked disabled>
               <label for="asistencia">No</label><br>
 
@@ -62,13 +57,20 @@
             <label for="resultado">Resultado:</label>
               <input readonly type="text" class="form-control" name="resultado" id="resultado" placeholder="resultado" value="{{old('resultado', $estudio->resultado)}}">
           </div>
-          
-            <div class="form-group">
-              <label for="documento">Documento: </label>
+          {{--  Documento y recuperacion de nombre  --}}
+          <div class="form-group">
+            <label for="documento">Documento: </label>
 
-                <a type="text" class="form-control" href="../../storage/{{$estudio->tipo."-".$estudio->fechaRealizacion."-".str_replace(":", "", $estudio->horaRealizacion)}}.pdf">Ver documento de estudio</a>
-              
-            </div>
+            @if(file_exists(public_path().'/storage/'.$estudio->tipo."-".$estudio->fechaRealizacion."-".str_replace(":", "", $estudio->horaRealizacion).'.pdf'))
+            <a type="text" class="form-control" href="../../storage/{{$estudio->tipo."-".$estudio->fechaRealizacion."-".str_replace(":", "", $estudio->horaRealizacion)}}.pdf">Ver documento de estudio</a>
+            @elseif (file_exists(public_path().'/storage/'.$estudio->tipo."-".$estudio->fechaRealizacion."-".str_replace(":", "", $estudio->horaRealizacion).'.png'))
+            <a type="text" class="form-control" href="../../storage/{{$estudio->tipo."-".$estudio->fechaRealizacion."-".str_replace(":", "", $estudio->horaRealizacion)}}.png">Ver documento de estudio</a>
+            @elseif(file_exists(public_path().'/storage/'.$estudio->tipo."-".$estudio->fechaRealizacion."-".str_replace(":", "", $estudio->horaRealizacion).'.jpg'))
+            <a type="text" class="form-control" href="../../storage/{{$estudio->tipo."-".$estudio->fechaRealizacion."-".str_replace(":", "", $estudio->horaRealizacion)}}.jpg">Ver documento de estudio</a>
+            @else
+            <a>No se subió un archivo en la ultima actualización</>
+            @endif
+          </div>
          
 
     </form>

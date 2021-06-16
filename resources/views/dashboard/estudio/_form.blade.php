@@ -11,6 +11,7 @@
 
     <form class= container>
         <div>
+          <br>
             <h3 class="col-md-6 offset-md-3">
                 Estudio
             </h3>
@@ -89,14 +90,15 @@
         {{--  Espacio para subir un archivo  --}}
                 <div>
                   <label for="formFile" class="form-label">Sube tu archivo aquí</label>
-                  <input class="form-control form-control" name='documento' id="documento" type="file" value="{{old('documento', $estudio->documento)}}" method='PUT'>
-                  @csrf
-                  {{method_field('POST')}}
+                  <input class="form-control form-control" name='documento' id="documento" type="file" value="{{old('documento', $estudio->documento)}}">
+                  
                 </div>
 
 
         <div class="col-md-6 offset-md-3">
             <button type="submit" class="btn btn-primary">Registrar</button></div>
+            <br>
+            <br>
         </div>
       </br>
       </br>

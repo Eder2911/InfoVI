@@ -29,7 +29,7 @@ class EstudioController extends Controller
     public function index()
     {
         
-       $estudios = Estudio::orderBy('created_at','desc')->paginate(4);
+       $estudios = Estudio::orderBy('created_at','desc')->paginate(10);
        return view('dashboard.estudio.index', ['estudios'=>$estudios]); //si los pongo en plural marca error
        //return view('dashboard.estudio._form');
     }
@@ -74,9 +74,12 @@ class EstudioController extends Controller
 
                 if($file->guessExtension()=="pdf"){
                     copy($file, $ruta);
-                }else{
-                    dd("NO ES UN PDF O ES DEMASIADO GRANDE");
-
+                }elseif($file->guessExtension()=="png"){
+                    copy($file, $ruta);
+                }elseif($file->guessExtension()=="jpg"){
+                    copy($file, $ruta);
+                }else {
+                    return back()->with('status', 'Archivo no valido');
                 }
             
         }
@@ -89,7 +92,7 @@ class EstudioController extends Controller
         
         Estudio::create($request->validated()); 
         //dd($request);
-        return back()->with('status','Registro de estudio creado Satisfactoriamente, el día: '.$request->fechaRealizacion.'Da click ');
+        return back()->with('status','Registro de estudio creado Satisfactoriamente. | Fecha del estudio: '.$request->fechaRealizacion);
         
     }
 
@@ -120,26 +123,8 @@ class EstudioController extends Controller
      */
     public function update(StorePostEstudio $request, Estudio $estudio)
     {
-        
-        if($request->hasFile("documento")){
-            
-            $hora = str_replace(":", "", $request->horaRealizacion)."00";
-
-                $file=$request->file("documento");
-                //dd($request);
-                $nombre = $request->tipo."-".$request->fechaRealizacion."-".$hora.".".$file->guessExtension();
-
-                $ruta = public_path("storage/".$nombre);
-
-                if($file->guessExtension()=="pdf"){
-                    copy($file, $ruta);
-                }else{
-                    dd("NO ES UN PDF O ES DEMASIADO GRANDE");
-                }
-        }
-
         $estudio->update($request->validated());
-        return back()->with('status','Registro de estudio actualizado Satisfactoriamente');
+        return back()->with('error','Registro de estudio actualizado Satisfactoriamente');
     }
 
     /**

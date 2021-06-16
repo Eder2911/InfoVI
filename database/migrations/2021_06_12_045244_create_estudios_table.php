@@ -18,13 +18,13 @@ class CreateEstudiosTable extends Migration
             $table->string('tipo', 200);
             $table->date('fechaRealizacion');
             $table->time('horaRealizacion');
-            $table->char('asistencia', 1)->nullable();
+            $table->char('asistencia', 1);
             $table->date('fechaEntrega')->nullable();
             $table->date('fechaProximo')->nullable();
             $table->date('fechaRevision')->nullable();
             $table->string('resultado', 100)->nullable();
-            $table->string('documento', 500);
-            $table->timestamps(); //Debemos agregarlalo en el diagrama?
+            $table->string('documento', 500)->nullable();
+            $table->timestamps();
         });
     }
 

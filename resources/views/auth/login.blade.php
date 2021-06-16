@@ -60,11 +60,6 @@
                                     {{ __('Acceder') }}
                                 </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Â¿Olvidaste tu contrasenia?') }}
-                                    </a>
-                                @endif
                             </div>
                         </div>
                     </form>
